@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dwk-main-application-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dwk-main-application
+  template:
+    metadata:
+      labels:
+        app: dwk-main-application
+    spec:
+      containers:
+        - name: dwk-main-application
+          image: volepp/dwk-main-application
