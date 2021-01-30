@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: devops-with-kubernetes-project-dep
+    name: dwk-project-dep
 spec:
     replicas: 1
     selector:
         matchLabels:
-            app: devops-with-kubernetes-project
+            app: dwk-project
     template:
         metadata:
             labels:
-                app: devops-with-kubernetes-project
+                app: dwk-project
         spec:
             containers:
-                - name: devops-with-kubernetes-project
-                  image: volepp/devops-with-kubernetes-project
+                - name: dwk-project
+                  image: volepp/dwk-project
