@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: dwk-pingpong-dep
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: dwk-pingpong
+    template:
+        metadata:
+            labels:
+                app: dwk-pingpong
+        spec:
+            containers:
+                - name: dwk-pingpong
+                  image: volepp/dwk-pingpong:v0.1
