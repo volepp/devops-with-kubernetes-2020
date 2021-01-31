@@ -12,6 +12,19 @@ spec:
       labels:
         app: dwk-main-application
     spec:
+      volumes:
+        - name: shared-hash
+          emptyDir: {}
       containers:
-        - name: dwk-main-application
-          image: volepp/dwk-main-application:v0.1
+        - name: dwk-main-application-generator
+          image: volepp/dwk-main-application-generator:v0.1.2
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: shared-hash
+              mountPath: /usr/src/app/files
+        - name: dwk-main-application-reader
+          image: volepp/dwk-main-application-reader:v0.1.3
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: shared-hash
+              mountPath: /usr/src/app/files
