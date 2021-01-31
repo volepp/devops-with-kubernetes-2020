@@ -14,4 +14,4 @@ spec:
         spec:
             containers:
                 - name: dwk-project
-                  image: volepp/dwk-project
+                  image: volepp/dwk-project:v0.3
