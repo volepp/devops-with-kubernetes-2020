@@ -15,14 +15,21 @@ func getStatus(w http.ResponseWriter, r *http.Request) {
 
 	switch r.Method {
 	case "GET":
-		filePath := "/usr/src/app/files/hash.txt"
-		text, err := ioutil.ReadFile(filePath)
+		hashFilePath := "/usr/src/app/files/hash.txt"
+		hashText, err := ioutil.ReadFile(hashFilePath)
 		if err != nil {
 			fmt.Fprint(w, "Error")
-			log.Println("Couldn't load text: ", err)
+			log.Println("Couldn't load hashText: ", err)
 			return
 		}
-		fmt.Fprint(w, string(text))
+		pingpongFile := "/usr/src/app/files/pingpong.txt"
+		pingpongText, err := ioutil.ReadFile(pingpongFile)
+		if err != nil {
+			fmt.Fprint(w, "Error")
+			log.Println("Couldn't load ping pong text:", err)
+			return
+		}
+		fmt.Fprint(w, fmt.Sprintf("%s\nPing / Pongs: %s", string(hashText), string(pingpongText)))
 	}
 }
 

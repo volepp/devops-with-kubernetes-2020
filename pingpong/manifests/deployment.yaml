@@ -12,6 +12,14 @@ spec:
             labels:
                 app: dwk-pingpong
         spec:
+            volumes:
+              - name: shared-volume
+                persistentVolumeClaim:
+                    claimName: dwk-main-application-claim
             containers:
                 - name: dwk-pingpong
-                  image: volepp/dwk-pingpong:v0.1
+                  image: volepp/dwk-pingpong:v0.2
+                  imagePullPolicy: Always
+                  volumeMounts:
+                    - name: shared-volume
+                      mountPath: /usr/src/app/files
