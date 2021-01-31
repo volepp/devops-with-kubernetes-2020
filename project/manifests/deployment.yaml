@@ -12,6 +12,14 @@ spec:
             labels:
                 app: dwk-project
         spec:
+            volumes:
+              - name: shared-volume
+                persistentVolumeClaim:
+                    claimName: dwk-main-application-claim
             containers:
                 - name: dwk-project
-                  image: volepp/dwk-project:v0.3
+                  image: volepp/dwk-project:v0.6
+                  imagePullPolicy: Always
+                  volumeMounts:
+                    - name: shared-volume
+                      mountPath: /usr/src/app/public
