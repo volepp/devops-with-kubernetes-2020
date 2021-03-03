@@ -18,7 +18,7 @@ spec:
                     claimName: dwk-main-application-claim
             containers:
                 - name: dwk-pingpong
-                  image: volepp/dwk-pingpong:v0.2
+                  image: volepp/dwk-pingpong:v0.2.1
                   imagePullPolicy: Always
                   volumeMounts:
                     - name: shared-volume

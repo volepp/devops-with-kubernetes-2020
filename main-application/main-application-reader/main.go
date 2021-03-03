@@ -1,10 +1,11 @@
 package main
 
-import(
-	"log"
+import (
 	"fmt"
-	"net/http"
 	"io/ioutil"
+	"log"
+	"net/http"
+	"strconv"
 )
 
 func getStatus(w http.ResponseWriter, r *http.Request) {
@@ -22,15 +23,41 @@ func getStatus(w http.ResponseWriter, r *http.Request) {
 			log.Println("Couldn't load hashText: ", err)
 			return
 		}
-		pingpongFile := "/usr/src/app/files/pingpong.txt"
-		pingpongText, err := ioutil.ReadFile(pingpongFile)
-		if err != nil {
-			fmt.Fprint(w, "Error")
-			log.Println("Couldn't load ping pong text:", err)
-			return
-		}
-		fmt.Fprint(w, fmt.Sprintf("%s\nPing / Pongs: %s", string(hashText), string(pingpongText)))
+		// pingpongFile := "/usr/src/app/files/pingpong.txt"
+		// pingpongText, err := ioutil.ReadFile(pingpongFile)
+		// if err != nil {
+		// 	fmt.Fprint(w, "Error")
+		// 	log.Println("Couldn't load ping pong text:", err)
+		// 	return
+		// }
+		nrPongs := fetchNrPongs()
+		fmt.Fprint(w, fmt.Sprintf("%s\nPing / Pongs: %v", string(hashText), nrPongs))
 	}
+}
+
+func fetchNrPongs() int {
+	path := "http://dwk-pingpong-svc:2345/pongs"
+
+	res, err := http.Get(path)
+	if err != nil {
+		log.Println("Couldn't fetch pongs:", err)
+		return -1
+	}
+
+	resContent, err := ioutil.ReadAll(res.Body)
+
+	res.Body.Close()
+	if err != nil {
+		log.Println("Couldn't read pongs from the response:", err)
+		return -1
+	}
+	nrPongs, err := strconv.Atoi(string(resContent))
+	if err != nil {
+		log.Println("Couldn't convert pongs to int:", err)
+		return -1
+	}
+
+	return nrPongs
 }
 
 func main() {

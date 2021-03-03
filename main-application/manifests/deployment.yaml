@@ -24,7 +24,7 @@ spec:
             - name: shared-volume
               mountPath: /usr/src/app/files
         - name: dwk-main-application-reader
-          image: volepp/dwk-main-application-reader:v0.2
+          image: volepp/dwk-main-application-reader:v0.2.1
           imagePullPolicy: Always
           volumeMounts:
             - name: shared-volume

@@ -6,17 +6,21 @@ var path = require("path")
 
 var counter = 0
 
-const directory = path.join("/", "usr", "src", "app", "files")
-const filePath = path.join(directory, "pingpong.txt")
+// const directory = path.join("/", "usr", "src", "app", "files")
+// const filePath = path.join(directory, "pingpong.txt")
 
-fs.writeFile(filePath, `${counter}`, () => {
-	console.log(`Wrote to file ${filePath}`)
-})
+// fs.writeFile(filePath, `${counter}`, () => {
+// 	console.log(`Wrote to file ${filePath}`)
+// })
 
 app.get("/", (req, res) => {
 	counter++
-	fs.writeFile(filePath, `${counter}`, () => {})
+	// fs.writeFile(filePath, `${counter}`, () => {})
 	res.send(`pong ${counter}`)
+})
+
+app.get("/pongs", (req, res) => {
+	res.send(`${counter}`)
 })
 
 app.listen(port, () => {

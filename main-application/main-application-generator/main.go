@@ -1,11 +1,11 @@
 package main
 
-import(
+import (
 	"fmt"
 	"log"
-	"time"
 	"math/rand"
 	"os"
+	"time"
 )
 
 func main() {
@@ -25,9 +25,9 @@ func main() {
 		if err != nil {
 			log.Println("Couldn't truncate file: ", err)
 		}
-		f.Seek(0,0)
+		f.Seek(0, 0)
 		f.WriteString(hash)
-		time.Sleep(5*time.Second)
+		time.Sleep(5 * time.Second)
 	}
 }
 
