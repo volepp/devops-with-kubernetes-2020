@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: dwk-project-images-dep
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: dwk-project-images
+    template:
+        metadata:
+            labels:
+                app: dwk-project-images
+        spec:
+            volumes:
+              - name: shared-volume
+                persistentVolumeClaim:
+                    claimName: dwk-main-application-claim
+            containers:
+                - name: dwk-project
+                  image: volepp/dwk-project-images:v1.0
+                  imagePullPolicy: Always
+                  volumeMounts:
+                    - name: shared-volume
+                      mountPath: /usr/src/app/public

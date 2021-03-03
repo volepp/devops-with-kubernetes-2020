@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: dwk-project-frontend-dep
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: dwk-project-frontend
+    template:
+        metadata:
+            labels:
+                app: dwk-project-frontend
+        spec:
+            containers:
+                - name: dwk-project
+                  image: volepp/dwk-project-frontend:v1.0
+                  imagePullPolicy: Always
