@@ -15,7 +15,7 @@ spec:
             volumes:
               - name: shared-volume
                 persistentVolumeClaim:
-                    claimName: dwk-main-application-claim
+                    claimName: dwk-project-pvc
             containers:
                 - name: dwk-project
                   image: volepp/dwk-project-images:v1.0
