@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+    namespace: main-application
     name: dwk-pingpong-dep
 spec:
     replicas: 1
@@ -15,7 +16,7 @@ spec:
             volumes:
               - name: shared-volume
                 persistentVolumeClaim:
-                    claimName: dwk-main-application-claim
+                    claimName: dwk-main-application-pvc
             containers:
                 - name: dwk-pingpong
                   image: volepp/dwk-pingpong:v0.2.1

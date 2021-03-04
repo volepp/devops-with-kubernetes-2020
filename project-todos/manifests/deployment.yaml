@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: dwk-project-todos
+    name: dwk-project-todos-dep
 spec:
     replicas: 1
     selector:
