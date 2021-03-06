@@ -16,8 +16,8 @@ const sequelize = new Sequelize(`postgres://${postgresUser}:${postgresPass}@dwk-
 
 class Todo extends Model {}
 Todo.init({
-	text: DataTypes.STRING
-}, { sequelize, modelNam: "todo" });
+	text: DataTypes.STRING(140)
+}, { sequelize, modelName: "todo" });
 
 (async () => {
 	await sequelize.sync()

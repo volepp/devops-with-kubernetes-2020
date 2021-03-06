@@ -10,7 +10,7 @@ spec:
         spec:
           containers:
           - name: dwk-daily-todo
-            image: volepp/dwk-daily-todo:v1.2
+            image: volepp/dwk-daily-todo:v1.3
             imagePullPolicy: IfNotPresent
             env:
             - name: POSTGRES_DB

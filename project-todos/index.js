@@ -3,6 +3,9 @@ const app = express()
 const port = 3000
 const bodyParser = require("body-parser")
 const { Sequelize, Model, DataTypes } = require("sequelize")
+const morgan = require("morgan")
+
+app.use(morgan("combined"))
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -14,8 +17,8 @@ const sequelize = new Sequelize(`postgres://${postgresUser}:${postgresPass}@dwk-
 
 class Todo extends Model {}
 Todo.init({
-	text: DataTypes.STRING
-}, { sequelize, modelNam: "todo" });
+	text: DataTypes.STRING(140)
+}, { sequelize, modelName: "todo" });
 
 app.get("/", async (req, res) => {
 	var todos = await Todo.findAll()
@@ -31,7 +34,9 @@ app.get("/", async (req, res) => {
 app.post("/", async (req, res) => {
 	todoName = req.body["todo-name"]
 
-	await Todo.create({ text: todoName })
+	if (todoName.length <= 140) {
+		await Todo.create({ text: todoName })
+	}
 
 	res.redirect("back")
 })
