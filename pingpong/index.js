@@ -3,24 +3,46 @@ const app = express()
 const port = 3000
 const fs = require("fs")
 var path = require("path")
+const { Sequelize, Model, DataTypes } = require("sequelize")
+const { isNullOrUndefined } = require("util")
 
-var counter = 0
+var postgresDB = process.env.POSTGRES_DB
+var postgresUser = process.env.POSTGRES_USER
+var postgresPass = process.env.POSTGRES_PASSWORD
 
-// const directory = path.join("/", "usr", "src", "app", "files")
-// const filePath = path.join(directory, "pingpong.txt")
+const sequelize = new Sequelize(`postgres://${postgresUser}:${postgresPass}@dwk-postgres-svc.main-application:5432/${postgresDB}`)
 
-// fs.writeFile(filePath, `${counter}`, () => {
-// 	console.log(`Wrote to file ${filePath}`)
-// })
+class Pong extends Model {}
+Pong.init({
+	amount: DataTypes.INTEGER
+}, { sequelize, modelName: "pong" });
 
-app.get("/", (req, res) => {
-	counter++
-	// fs.writeFile(filePath, `${counter}`, () => {})
-	res.send(`pong ${counter}`)
+(async () => {
+	await sequelize.sync()
+	const allPongs = await Pong.findAll()
+	if (allPongs.length == 0) {
+		const pong = await Pong.create({
+			amount: 0
+		})
+	}
+})()
+
+app.get("/", async (req, res) => {
+	var pongs = await Pong.findAll()
+	var amount = pongs[0].amount+1
+	await Pong.update({ amount: amount }, {
+		where: {
+			id: pongs[0].id
+		}
+	})
+	res.send(`pong ${amount}`)
 })
 
-app.get("/pongs", (req, res) => {
-	res.send(`${counter}`)
+app.get("/pongs", async (req, res) => {
+	var pongs = await Pong.findAll()
+	var amount = pongs[0].amount
+
+	res.send(`${amount}`)
 })
 
 app.listen(port, () => {
