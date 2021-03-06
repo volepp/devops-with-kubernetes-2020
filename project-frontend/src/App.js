@@ -50,7 +50,7 @@ class App extends React.Component {
         <ul>
           { todos.map(todo => (
             <li>
-              {todo}
+              {todo.text}
             </li>
           ))}
         </ul>

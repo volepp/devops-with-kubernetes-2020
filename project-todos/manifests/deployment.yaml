@@ -15,5 +15,21 @@ spec:
         spec:
             containers:
                 - name: dwk-project-todos
-                  image: volepp/dwk-project-todos:v1.0
+                  image: volepp/dwk-project-todos:v1.2
                   imagePullPolicy: Always
+                  env:
+                    - name: POSTGRES_DB
+                      valueFrom:
+                        secretKeyRef:
+                            name: dwk-postgres-credentials
+                            key: POSTGRES_DB
+                    - name: POSTGRES_USER
+                      valueFrom:
+                        secretKeyRef:
+                            name: dwk-postgres-credentials
+                            key: POSTGRES_USER
+                    - name: POSTGRES_PASSWORD
+                      valueFrom:
+                        secretKeyRef:
+                            name: dwk-postgres-credentials
+                            key: POSTGRES_PASSWORD

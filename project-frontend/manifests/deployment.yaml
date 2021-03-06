@@ -14,5 +14,5 @@ spec:
         spec:
             containers:
                 - name: dwk-project
-                  image: volepp/dwk-project-frontend:v1.0
+                  image: volepp/dwk-project-frontend:v1.2
                   imagePullPolicy: Always

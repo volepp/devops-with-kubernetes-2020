@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: project
+  name: dwk-postgres-ss
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dwk-postgres
+  serviceName: dwk-postgres-svc
+  template:
+    metadata:
+      labels:
+        app: dwk-postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:13.2
+        imagePullPolicy: "IfNotPresent"
+        ports:
+          - containerPort: 5432
+        env:
+          - name: POSTGRES_DB
+            valueFrom:
+              secretKeyRef:
+                name: dwk-postgres-credentials
+                key: POSTGRES_DB
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: dwk-postgres-credentials
+                key: POSTGRES_USER
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: dwk-postgres-credentials
+                key: POSTGRES_PASSWORD
+        volumeMounts:
+          - name: data
+            mountPath: /data
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: local-path
+      resources:
+        requests:
+          storage: 1Gi
