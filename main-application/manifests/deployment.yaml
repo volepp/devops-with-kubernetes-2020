@@ -25,9 +25,15 @@ spec:
             - name: shared-volume
               mountPath: /usr/src/app/files
         - name: dwk-main-application-reader
-          image: volepp/dwk-main-application-reader:v0.2.1
+          image: volepp/dwk-main-application-reader:v0.2.6
           imagePullPolicy: Always
           volumeMounts:
             - name: shared-volume
               mountPath: /usr/src/app/files
               readOnly: true
+          env:
+            - name: MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: main-application-configmap
+                  key: message

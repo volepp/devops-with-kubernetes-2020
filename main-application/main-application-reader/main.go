@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 	"strconv"
 )
 
@@ -16,6 +17,8 @@ func getStatus(w http.ResponseWriter, r *http.Request) {
 
 	switch r.Method {
 	case "GET":
+		message := os.Getenv("MESSAGE")
+
 		hashFilePath := "/usr/src/app/files/hash.txt"
 		hashText, err := ioutil.ReadFile(hashFilePath)
 		if err != nil {
@@ -31,7 +34,8 @@ func getStatus(w http.ResponseWriter, r *http.Request) {
 		// 	return
 		// }
 		nrPongs := fetchNrPongs()
-		fmt.Fprint(w, fmt.Sprintf("%s\nPing / Pongs: %v", string(hashText), nrPongs))
+		fmt.Fprint(w, fmt.Sprintf("%s\n%s\nPing / Pongs: %v",
+			message, string(hashText), nrPongs))
 	}
 }
 
