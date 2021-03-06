@@ -1,0 +1,31 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: dwk-daily-todo
+spec:
+  schedule: "0 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: dwk-daily-todo
+            image: volepp/dwk-daily-todo:v1.2
+            imagePullPolicy: IfNotPresent
+            env:
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                    name: dwk-postgres-credentials
+                    key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                    name: dwk-postgres-credentials
+                    key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                    name: dwk-postgres-credentials
+                    key: POSTGRES_PASSWORD
+          restartPolicy: OnFailure
