@@ -1,8 +1,6 @@
 const express = require("express")
 const app = express()
 const port = 3000
-const fs = require("fs")
-var path = require("path")
 const { Sequelize, Model, DataTypes } = require("sequelize")
 const { isNullOrUndefined } = require("util")
 
@@ -27,7 +25,7 @@ Pong.init({
 	}
 })()
 
-app.get("/", async (req, res) => {
+app.get("/pingpong", async (req, res) => {
 	var pongs = await Pong.findAll()
 	var amount = pongs[0].amount+1
 	await Pong.update({ amount: amount }, {
@@ -38,7 +36,7 @@ app.get("/", async (req, res) => {
 	res.send(`pong ${amount}`)
 })
 
-app.get("/pongs", async (req, res) => {
+app.get("/pingpong/pongs", async (req, res) => {
 	var pongs = await Pong.findAll()
 	var amount = pongs[0].amount
 

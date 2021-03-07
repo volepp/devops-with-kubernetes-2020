@@ -1,25 +1,17 @@
-apiVersion: networking.k8s.io/v1
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-    namespace: main-application
-    name: dwk-main-application-ingress
-    annotations:
-        traefik.ingress.kubernetes.io/rule-type: "PathPrefixStrip"
+  namespace: main-application
+  name: dwk-main-application-ingress
 spec:
-    rules:
-      - http:
-            paths:
-              - path: /
-                pathType: Prefix
-                backend:
-                    service:
-                        name: dwk-main-application-svc
-                        port:
-                            number: 2345
-              - path: /pingpong
-                pathType: Prefix
-                backend:
-                    service:
-                        name: dwk-pingpong-svc
-                        port:
-                            number: 2345
+  rules:
+    - http:
+        paths:
+        - path: /status
+          backend:
+            serviceName: dwk-main-application-svc
+            servicePort: 80
+        - path: /pingpong
+          backend:
+            serviceName: dwk-pingpong-svc
+            servicePort: 80

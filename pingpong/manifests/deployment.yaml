@@ -13,13 +13,9 @@ spec:
             labels:
                 app: dwk-pingpong
         spec:
-            volumes:
-              - name: shared-volume
-                persistentVolumeClaim:
-                    claimName: dwk-main-application-pvc
             containers:
                 - name: dwk-pingpong
-                  image: volepp/dwk-pingpong:v0.2.7
+                  image: volepp/dwk-pingpong:v0.3.2
                   imagePullPolicy: Always
                   env:
                     - name: POSTGRES_DB
@@ -37,6 +33,3 @@ spec:
                         secretKeyRef:
                             name: dwk-postgres-credentials
                             key: POSTGRES_PASSWORD
-                  volumeMounts:
-                    - name: shared-volume
-                      mountPath: /usr/src/app/files
