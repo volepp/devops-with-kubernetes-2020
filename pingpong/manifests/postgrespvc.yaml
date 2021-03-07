@@ -4,7 +4,6 @@ metadata:
   namespace: main-application
   name: dwk-postgres-pvc
 spec:
-  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:

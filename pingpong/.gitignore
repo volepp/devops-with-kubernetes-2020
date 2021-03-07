@@ -1,3 +1,5 @@
+manifests/secret.yaml
+
 # Linux
 .directory
 *~

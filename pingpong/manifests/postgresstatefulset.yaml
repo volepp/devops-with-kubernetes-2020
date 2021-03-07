@@ -38,13 +38,13 @@ spec:
                 key: POSTGRES_PASSWORD
         volumeMounts:
           - name: data
-            mountPath: /data
+            mountPath: /var/lib/postgresql/data
+            subPath: postgres
   volumeClaimTemplates:
   - metadata:
       name: data
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: local-path
       resources:
         requests:
           storage: 1Gi
