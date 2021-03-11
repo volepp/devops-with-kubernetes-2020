@@ -1,38 +1,27 @@
-apiVersion: networking.k8s.io/v1
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-    name: dwk-project-ingress
-    annotations:
-        traefik.ingress.kubernetes.io/rule-type: "PathPrefixStrip"
+  namespace: project
+  name: dwk-project-ingress
 spec:
-    rules:
-      - http:
-            paths:
-              - path: /
-                pathType: Prefix
-                backend:
-                    service:
-                        name: dwk-project-frontend-svc
-                        port:
-                            number: 2345
-              - path: /pingpong
-                pathType: Prefix
-                backend:
-                    service:
-                        name: dwk-pingpong-svc
-                        port:
-                            number: 2345
-              - path: /images
-                pathType: Prefix
-                backend:
-                    service:
-                        name: dwk-project-images-svc
-                        port:
-                            number: 2345
-              - path: /todos
-                pathType: Prefix
-                backend:
-                    service:
-                        name: dwk-project-todos-svc
-                        port:
-                            number: 2345
+  rules:
+    - http:
+        paths:
+        - path: /
+          backend:
+            service:
+                name: dwk-project-frontend-svc
+                port:
+                number: 2345
+        - path: /images
+          backend:
+            service:
+                name: dwk-project-images-svc
+                port:
+                number: 2345
+        - path: /todos
+          backend:
+            service:
+                name: dwk-project-todos-svc
+                port:
+                number: 2345
