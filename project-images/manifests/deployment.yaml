@@ -18,7 +18,7 @@ spec:
                     claimName: dwk-project-pvc
             containers:
                 - name: dwk-project
-                  image: volepp/dwk-project-images:v1.0
+                  image: PROJECT/IMAGES_IMAGE
                   imagePullPolicy: Always
                   volumeMounts:
                     - name: shared-volume

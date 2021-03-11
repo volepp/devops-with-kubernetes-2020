@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- project-frontend/manifests/persistentvolumeclaim.yaml
+- project-frontend/manifests/deployment.yaml
+- project-frontend/manifests/service.yaml
+- project-frontend/manifests/ingress.yaml
+- project-images/manifests/deployment.yaml
+- project-images/manifests/service.yaml
+- project-todos/manifests/sealedsecret.yaml
+- project-todos/manifests/postgrespvc.yaml
+- project-todos/manifests/postgresstatefulset.yaml
+- project-todos/manifests/postgressvc.yaml
+- project-todos/manifests/deployment.yaml
+- project-todos/manifests/service.yaml
+
+images:
+- name: PROJECT/FRONTEND_IMAGE
+  newName: volepp/dwk-project-frontend
+- name: PROJECT/IMAGES_IMAGE
+  newName: volepp/dwk-project-images
+- name: PROJECT/TODOS_IMAGE
+  newName: volepp/dwk-project-todos

@@ -3,7 +3,6 @@ kind: PersistentVolume
 metadata:
   name: project-postgres-pv
 spec:
-  storageClassName: manual
   capacity:
     storage: 1Gi
   volumeMode: Filesystem
