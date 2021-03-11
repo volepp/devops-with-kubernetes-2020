@@ -12,8 +12,9 @@ app.use(bodyParser.urlencoded({ extended: true }))
 var postgresDB = process.env.POSTGRES_DB
 var postgresUser = process.env.POSTGRES_USER
 var postgresPass = process.env.POSTGRES_PASSWORD
+var namespace = process.env.NAMESPACE
 
-const sequelize = new Sequelize(`postgres://${postgresUser}:${postgresPass}@dwk-postgres-svc.project:5432/${postgresDB}`)
+const sequelize = new Sequelize(`postgres://${postgresUser}:${postgresPass}@dwk-postgres-svc.${namespace}:5432/${postgresDB}`)
 
 class Todo extends Model {}
 Todo.init({

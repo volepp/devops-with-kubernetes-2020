@@ -32,3 +32,8 @@ spec:
                         secretKeyRef:
                             name: dwk-postgres-credentials
                             key: POSTGRES_PASSWORD
+                    - name: NAMESPACE
+                      valueFrom:
+                        configMapKeyRef:
+                          name: namespace-config
+                          key: namespace
