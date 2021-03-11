@@ -12,6 +12,7 @@ resources:
 - project-todos/manifests/postgressvc.yaml
 - project-todos/manifests/deployment.yaml
 - project-todos/manifests/service.yaml
+- project-todos/manifests/sealedsecret.yaml
 
 images:
 - name: PROJECT/FRONTEND_IMAGE
