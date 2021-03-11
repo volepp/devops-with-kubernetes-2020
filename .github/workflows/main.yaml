@@ -5,7 +5,7 @@ on:
 
 env:
   GKE_CLUSTER: dwk-cluster
-  GKE_ZONE: europe-nort1-b
+  GKE_ZONE: europe-north1-b
   FRONTEND_IMAGE: dwk-project-frontend
   IMAGES_IMAGE: dwk-project-images
   TODOS_IMAGE: dwk-project-todos
