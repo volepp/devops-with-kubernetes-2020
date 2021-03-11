@@ -25,5 +25,5 @@ jobs:
 
     - run: gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
 
-    - name: Delete
-      run: kubectl delete namespace ${GITHUB_REF#refs/heads/}
+    - name: Delete namespace
+      run: kubectl delete namespace ${{ github.event.ref }}
