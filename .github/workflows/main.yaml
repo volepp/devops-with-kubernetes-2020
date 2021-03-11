@@ -59,6 +59,7 @@ jobs:
         ./kustomize edit set image PROJECT/FRONTEND_IMAGE=$FRONTEND_IMAGE_WITH_TAG
         ./kustomize edit set image PROJECT/IMAGES_IMAGE=$IMAGES_IMAGE_WITH_TAG
         ./kustomize edit set image PROJECT/TODOS_IMAGE=$TODOS_IMAGE_WITH_TAG
+        kubectl create secret generic dwk-postgres-credentials --POSTGRES_DB=${{ secrets.POSTGRES_DB }} --POSTGRES_USER=${{ secrets.POSTGRES_USER }} --POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
         kubectl apply -k .
         kubectl rollout status deployment $FRONTEND_IMAGE-dep
         kubectl rollout status deployment $IMAGES_IMAGE-dep
