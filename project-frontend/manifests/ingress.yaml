@@ -9,19 +9,13 @@ spec:
         paths:
         - path: /
           backend:
-            service:
-                name: dwk-project-frontend-svc
-                port:
-                number: 2345
+            serviceName: dwk-project-frontend-svc
+            servicePort: 2345
         - path: /images
           backend:
-            service:
-                name: dwk-project-images-svc
-                port:
-                number: 2345
+            serviceName: dwk-project-images-svc
+            servicePort: 2345
         - path: /todos
           backend:
-            service:
-                name: dwk-project-todos-svc
-                port:
-                number: 2345
+            serviceName: dwk-project-todos-svc
+            servicePort: 2345
