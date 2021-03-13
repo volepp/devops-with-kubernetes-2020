@@ -17,4 +17,4 @@ The way I see it, however, is that there are surely similar services of other pr
 In that way, learning Google Cloud SQL would most likely be helpful when picking up similar services of other providers such as Amazon or Microsoft.
 Learning new things never hurts.
 
-These are the considerations over which I base my decision to use Google Cloud SQL hosted Postgres database. It remains to be seen how this turns out in the end.
+These are the considerations on which I base my decision to use Google Cloud SQL hosted Postgres database. It remains to be seen how this turns out in the end.
