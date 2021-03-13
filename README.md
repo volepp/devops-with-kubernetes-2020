@@ -9,7 +9,7 @@ This would avoid the overhead that comes from learning Google Cloud SQL in the b
 We have to, however, consider other factors that could influence the decision as well. One of those factors is the burden of maintaining the database.
 Reading the docs for running a Postgres instance with Google Cloud SQL, I have a feeling that after learning it initially, Google Cloud SQL would take a lot of weight off our shoulders in the long run. In this regard I will, with some level of certainty, say that setting up a Postgres instance with Google Cloud SQL would be the wiser choice.
 
-I also think that creating backups of our data will be less bothersome using Google Cloud SQL. Again, I have no prior experience with the service but reading the docs gives me a feeling backing up the data shouldn't be too much of headache (of course I say that now but we'll see if that's the case when the time of setting it up actuallly comes).
+I also think that creating backups of our data will be less bothersome using Google Cloud SQL. Again, I have no prior experience with the service but reading the docs gives me a feeling backing up the data shouldn't be too much of headache (of course I say that now but we'll see if that's the case when the time comes to actually set it up).
 
 In the end there is still one more aspect I think needs to be addressed. Since I've never used Google Cloud SQL, I see this as a learning opportunity.
 Of course a case can be made for whether it's helpful to spend a lot of time (or very little, we'll see) learning provider specific technologies while you are not even certain you will stick with them over time.
