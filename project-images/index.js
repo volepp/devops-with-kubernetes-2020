@@ -15,6 +15,10 @@ if(!fs.existsSync(dateFilePath)) {
 	fs.writeFile(dateFilePath, "", () => {})
 }
 
+app.get("/", (req, res) => {
+	res.send("Health check")
+})
+
 app.get("/images", (req, res) => {
 	var dateString = getDateAsString()
 	var savedDate = fs.readFileSync(dateFilePath, "utf8")
