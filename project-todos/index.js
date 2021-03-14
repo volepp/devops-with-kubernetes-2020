@@ -21,7 +21,7 @@ Todo.init({
 	text: DataTypes.STRING(140)
 }, { sequelize, modelName: "todo" });
 
-app.get("/healthz", (req, res) => {
+app.get("/", (req, res) => {
 	res.send("healthy")
 })
 

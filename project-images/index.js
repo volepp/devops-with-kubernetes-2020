@@ -15,7 +15,7 @@ if(!fs.existsSync(dateFilePath)) {
 	fs.writeFile(dateFilePath, "", () => {})
 }
 
-app.get("/healthz", (req, res) => {
+app.get("/", (req, res) => {
 	res.send("healthy")
 })
 
