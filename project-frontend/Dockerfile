@@ -1,7 +1,16 @@
-FROM node:15
-WORKDIR /app
-COPY package*.json /app
+FROM node:alpine
+
+WORKDIR /usr/src/app
+
+COPY package* ./
+
 RUN npm ci
-COPY . /app
-EXPOSE 80
-CMD ["npm ","start"];
+
+COPY . .
+
+RUN npm run build
+
+
+FROM nginx:1.17.1-alpine
+
+COPY --from=build-step /app/build /usr/share/nginx/html
