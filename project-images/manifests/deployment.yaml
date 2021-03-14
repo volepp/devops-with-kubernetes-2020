@@ -23,15 +23,10 @@ spec:
                   volumeMounts:
                     - name: shared-volume
                       mountPath: /usr/src/app/public
-                  readinessProbe:
-                    tcpSocket:
+                  livenessProbe:
+                    httpGet:
+                        path: /healthz
                         port: 3000
                     initialDelaySeconds: 5
-                    periodSeconds: 10
-                  livenessProbe:
-                    tcpSocket:
-                        port: 3000
-                    initialDelaySeconds: 15
-                    periodSeconds: 20
-                    
+                    periodSeconds: 5
 

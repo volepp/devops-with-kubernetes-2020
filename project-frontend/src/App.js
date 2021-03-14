@@ -1,5 +1,7 @@
 import React from "react"
 
+import { Route } from 'react-router-dom'
+
 class App extends React.Component {
   constructor() {
     super()
@@ -39,21 +41,31 @@ class App extends React.Component {
     }
 
     return (
+
       <div className="App">
-        <img src="/images"/>
+
+        <Route path="/">
+        
+          <img src="/images"/>
+      
+          <form method="POST" action="/todos" >
+            <input type="text" id="todo-input" name="todo-name" />
+            <input type="submit" value="Create TODO" />
+          </form>
     
-        <form method="POST" action="/todos" >
-          <input type="text" id="todo-input" name="todo-name" />
-          <input type="submit" value="Create TODO" />
-        </form>
-  
-        <ul>
-          { todos.map(todo => (
-            <li>
-              {todo.text}
-            </li>
-          ))}
-        </ul>
+          <ul>
+            { todos.map(todo => (
+              <li>
+                {todo.text}
+              </li>
+            ))}
+          </ul>
+          
+        </Route>
+
+        <Route path="/healthz">
+          <p>Healthy</p>
+        </Route>
   
       </div>
     );
