@@ -24,10 +24,4 @@ spec:
                         port: 80
                     initialDelaySeconds: 5
                     periodSeconds: 5
-                  readinessProbe:
-                    httpGet:
-                        path: /healthz
-                        port: 3000
-                    initialDelaySeconds: 5
-                    periodSeconds: 5
             restartPolicy: Always
