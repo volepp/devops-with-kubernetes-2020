@@ -59,7 +59,7 @@ jobs:
         ./kustomize edit set image PROJECT/FRONTEND_IMAGE=$FRONTEND_IMAGE_WITH_TAG
         ./kustomize edit set image PROJECT/IMAGES_IMAGE=$IMAGES_IMAGE_WITH_TAG
         ./kustomize edit set image PROJECT/TODOS_IMAGE=$TODOS_IMAGE_WITH_TAG
-        kubectl create configmap namespace-config --from-literal='namespace=${GITHUB_REF#refs/heads/}' --dry-run -o yaml | kubectl apply -f -
+        kubectl create configmap namespace-config --from-literal=namespace=${GITHUB_REF#refs/heads/} --dry-run -o yaml | kubectl apply -f -
         kubectl create secret generic dwk-postgres-credentials --from-literal="POSTGRES_DB=${{ secrets.POSTGRES_DB }}" --from-literal="POSTGRES_USER=${{ secrets.POSTGRES_USER }}" --from-literal="POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" --dry-run -o yaml | kubectl apply -f -
         kubectl apply -k .
         kubectl rollout status deployment $FRONTEND_IMAGE-dep
