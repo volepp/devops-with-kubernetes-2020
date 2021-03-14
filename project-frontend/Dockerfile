@@ -1,7 +1,7 @@
-FROM node:15.11.0-alpine3.10
+FROM node:15
 WORKDIR /app
-COPY package*.json ./
+COPY package*.json /app
 RUN npm ci
-COPY . .
+COPY . /app
 EXPOSE 80
 CMD ["npm ","start"];
