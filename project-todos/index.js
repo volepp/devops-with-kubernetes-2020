@@ -21,10 +21,6 @@ Todo.init({
 	text: DataTypes.STRING(140)
 }, { sequelize, modelName: "todo" });
 
-app.get("/", (req, res) => {
-	res.send("Health check")
-})
-
 app.get("/todos", async (req, res) => {
 	var todos = await Todo.findAll()
 	todosJson = JSON.stringify(todos)
