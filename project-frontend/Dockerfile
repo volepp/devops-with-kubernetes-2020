@@ -1,13 +1,9 @@
-from node:alpine
-
+FROM node:15.11.0-alpine3.10
 WORKDIR /usr/src/app
-
-ENV PATH /user/src/app/node_modules/.bin:$PATH
-
-COPY package* ./
-
-RUN npm ci
-
+COPY package*.json ./
+ADD package.json /usr/src/app/package.json
+RUN npm install
+RUN npm install react-scripts@1.1.0 -g
 COPY . .
-
-CMD ["npm", "start"]
+EXPOSE 3000
+CMD ["npm ","start"];
