@@ -2,11 +2,12 @@ from node:alpine
 
 WORKDIR /usr/src/app
 
+ENV PATH /user/src/app/node_modules/.bin:$PATH
+
 COPY package* ./
 
 RUN npm ci
 
 COPY . .
 
-EXPOSE 80
 CMD ["npm", "start"]
