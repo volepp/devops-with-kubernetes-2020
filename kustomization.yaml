@@ -16,8 +16,11 @@ resources:
 
 images:
 - name: PROJECT/FRONTEND_IMAGE
-  newName: volepp/dwk-project-frontendv:1.4.2
+  newName: volepp/dwk-project-frontendv
+  newTag: v1.4.2
 - name: PROJECT/IMAGES_IMAGE
   newName: volepp/dwk-project-images:v1.4.2
+  newTag: v1.4.2
 - name: PROJECT/TODOS_IMAGE
   newName: volepp/dwk-project-todos:v1.4.2
+  newTag: v1.4.2
