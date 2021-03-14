@@ -5,7 +5,7 @@ const axios = require("axios")
 const fs = require("fs")
 var path = require("path")
 
-const imageDir = path.join("/", "usr", "src", "app", "public")
+const imageDir = path.join("/", "app", "public")
 const imagePath = path.join(imageDir, "image.jpg")
 const dateFilePath = path.join(imageDir, "imageDate.txt")
 

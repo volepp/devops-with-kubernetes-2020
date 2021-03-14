@@ -22,16 +22,16 @@ spec:
                   imagePullPolicy: Always
                   volumeMounts:
                     - name: shared-volume
-                      mountPath: /usr/src/app/public
+                      mountPath: /app/public
                   livenessProbe:
                     httpGet:
-                        path: /healthz
+                        path: /
                         port: 3000
                     initialDelaySeconds: 5
                     periodSeconds: 5
                   readinessProbe:
                     httpGet:
-                        path: /healthz
+                        path: /
                         port: 3000
                     initialDelaySeconds: 5
                     periodSeconds: 5
