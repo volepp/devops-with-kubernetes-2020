@@ -1,16 +1,18 @@
 FROM node:alpine
 
-WORKDIR /usr/src/app
+RUN mkdir /app
+
+WORKDIR /app
 
 COPY package* ./
 
 RUN npm ci
 
-COPY . .
+COPY . /app
 
 RUN npm run build
 
 
 FROM nginx:1.17.1-alpine
 
-COPY --from=build-step /usr/src//app/build /usr/share/nginx/html
+COPY --from=build-step /app/build /usr/share/nginx/html
