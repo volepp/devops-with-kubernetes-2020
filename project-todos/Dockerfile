@@ -4,7 +4,7 @@ RUN mkdir /app
 
 WORKDIR /app
 
-COPY package* /app
+COPY package* ./
 
 RUN npm ci
 
