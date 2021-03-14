@@ -19,8 +19,8 @@ images:
   newName: volepp/dwk-project-frontendv
   newTag: v1.4.2
 - name: PROJECT/IMAGES_IMAGE
-  newName: volepp/dwk-project-images:v1.4.2
+  newName: volepp/dwk-project-images
   newTag: v1.4.2
 - name: PROJECT/TODOS_IMAGE
-  newName: volepp/dwk-project-todos:v1.4.2
+  newName: volepp/dwk-project-todos
   newTag: v1.4.2
