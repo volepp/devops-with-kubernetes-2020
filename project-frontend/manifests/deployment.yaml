@@ -16,3 +16,5 @@ spec:
                 - name: dwk-project
                   image: PROJECT/FRONTEND_IMAGE
                   imagePullPolicy: Always
+                  ports:
+                    - containerPort: 80
