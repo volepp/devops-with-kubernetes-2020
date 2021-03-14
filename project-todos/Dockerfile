@@ -1,6 +1,8 @@
 from node:alpine
 
-WORKDIR /usr/src/app
+RUN mkdir /app
+
+WORKDIR /app
 
 COPY package* ./
 
