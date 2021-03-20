@@ -12,7 +12,7 @@ RUN npm install -g serve
 COPY . /app
 
 RUN npm run build
-RUN serve -s build
+CMD [ "serve", "-s", "build" ]
 
 FROM nginx:1.19.8-alpine
 
