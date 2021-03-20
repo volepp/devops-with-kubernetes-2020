@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+    namespace: main-application
     name: dwk-pingpong-dep
 spec:
     replicas: 1
@@ -14,7 +15,7 @@ spec:
         spec:
             containers:
                 - name: dwk-pingpong
-                  image: MAIN_APPLICATION/PINGPONG_IMAGE
+                  image: volepp/dwk-pingpong:v0.3.2
                   imagePullPolicy: Always
                   env:
                     - name: POSTGRES_DB

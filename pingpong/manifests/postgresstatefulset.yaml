@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
+  namespace: main-application
   name: dwk-postgres-ss
 spec:
   replicas: 1

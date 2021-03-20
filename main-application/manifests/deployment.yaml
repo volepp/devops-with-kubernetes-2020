@@ -18,13 +18,13 @@ spec:
               claimName: dwk-main-application-pvc
       containers:
         - name: dwk-main-application-generator
-          image: MAIN_APPLICATION/GENERATOR_IMAGE
+          image: volepp/dwk-main-application-generator:v0.1.2
           imagePullPolicy: Always
           volumeMounts:
             - name: shared-volume
               mountPath: /usr/src/app/files
         - name: dwk-main-application-reader
-          image: MAIN_APPLICATION/READER_IMAGE
+          image: volepp/dwk-main-application-reader:v0.3.2
           imagePullPolicy: Always
           volumeMounts:
             - name: shared-volume

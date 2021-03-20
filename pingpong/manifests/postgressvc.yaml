@@ -1,6 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: main-application
   name: dwk-postgres-svc
   labels:
     app: dwk-postgres
