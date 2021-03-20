@@ -6,6 +6,10 @@ on:
 env:
   GKE_CLUSTER: dwk-cluster
   GKE_ZONE: europe-north1-b
+  MAIN_APPLICATION_DEP: dwk-main-application-dep
+  MAIN_APPLICATION_READER_IMAGE: dwk-main-application-reader
+  MAIN_APPLICATION_GENERATOR_IMAGE: dwk-main-application-generator
+  MAIN_APPLICATION_PINGPONG_IMAGE: dwk-pingpong
   FRONTEND_IMAGE: dwk-project-frontend
   IMAGES_IMAGE: dwk-project-images
   TODOS_IMAGE: dwk-project-todos
@@ -21,6 +25,9 @@ jobs:
 
     - name: Create images' names and tags
       run: |
+        echo "MAIN_APPLICATION_READER_IMAGE_WITH_TAG=gcr.io/${{ secrets.GKE_PROJECT }}/$MAIN_APPLICATION_READER_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" >> $GITHUB_ENV
+        echo "MAIN_APPLICATION_GENERATOR_IMAGE_WITH_TAG=gcr.io/${{ secrets.GKE_PROJECT }}/$MAIN_APPLICATION_GENERATOR_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" >> $GITHUB_ENV
+        echo "MAIN_APPLICATION_PINGPONG_IMAGE_WITH_TAG=gcr.io/${{ secrets.GKE_PROJECT }}/$MAIN_APPLICATION_PINGPONG_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" >> $GITHUB_ENV
         echo "FRONTEND_IMAGE_WITH_TAG=gcr.io/${{ secrets.GKE_PROJECT }}/$FRONTEND_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" >> $GITHUB_ENV
         echo "IMAGES_IMAGE_WITH_TAG=gcr.io/${{ secrets.GKE_PROJECT }}/$IMAGES_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" >> $GITHUB_ENV
         echo "TODOS_IMAGE_WITH_TAG=gcr.io/${{ secrets.GKE_PROJECT }}/$TODOS_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" >> $GITHUB_ENV
@@ -36,12 +43,18 @@ jobs:
 
     - name: Build
       run: |
+        docker build --tag "$MAIN_APPLICATION_READER_IMAGE_WITH_TAG" ./main-application/main-application-reader
+        docker build --tag "$MAIN_APPLICATION_GENERATOR_IMAGE_WITH_TAG" ./main-application/main-application-generator
+        docker build --tag "$MAIN_APPLICATION_PINGPONG_IMAGE_WITH_TAG" ./pingpong
         docker build --tag "$FRONTEND_IMAGE_WITH_TAG" ./project-frontend
         docker build --tag "$IMAGES_IMAGE_WITH_TAG" ./project-images
         docker build --tag "$TODOS_IMAGE_WITH_TAG" ./project-todos
         
     - name: Publish
       run: |
+        docker push "$MAIN_APPLICATION_READER_IMAGE_WITH_TAG"
+        docker push "$MAIN_APPLICATION_GENERATOR_IMAGE_WITH_TAG"
+        docker push "$MAIN_APPLICATION_PINGPONG_IMAGE_WITH_TAG"
         docker push "$FRONTEND_IMAGE_WITH_TAG"
         docker push "$IMAGES_IMAGE_WITH_TAG"
         docker push "$TODOS_IMAGE_WITH_TAG"
@@ -62,6 +75,8 @@ jobs:
         kubectl create configmap namespace-config --from-literal=namespace=${GITHUB_REF#refs/heads/} --dry-run -o yaml | kubectl apply -f -
         kubectl create secret generic dwk-postgres-credentials --from-literal="POSTGRES_DB=${{ secrets.POSTGRES_DB }}" --from-literal="POSTGRES_USER=${{ secrets.POSTGRES_USER }}" --from-literal="POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" --dry-run -o yaml | kubectl apply -f -
         kubectl apply -k .
+        kubectl rollout status deployment $MAIN_APPLICATION_DEP
+        kubectl rollout status deployment $MAIN_APPLICATION_PINGPONG_IMAGE-dep
         kubectl rollout status deployment $FRONTEND_IMAGE-dep
         kubectl rollout status deployment $IMAGES_IMAGE-dep
         kubectl rollout status deployment $TODOS_IMAGE-dep

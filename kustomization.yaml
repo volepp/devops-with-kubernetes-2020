@@ -7,7 +7,6 @@ resources:
 - main-application/manifests/service.yaml
 - pingpong/manifests/deployment.yaml
 - pingpong/manifests/service.yaml
-- pingpong/manifests/deployment.yaml
 - project-frontend/manifests/deployment.yaml
 - project-frontend/manifests/service.yaml
 - project-frontend/manifests/ingress.yaml
@@ -22,6 +21,15 @@ resources:
 - project-todos/daily_todo/manifests/cronjob.yaml
 
 images:
+- name: MAIN_APPLICATION/READER_IMAGE
+  newName: volepp/dwk-main-application-reader
+  newTag: v0.3.2
+- name: MAIN_APPLICATION/GENERATOR_IMAGE
+  newName: volepp/dwk-main-application-generator
+  newTag: v0.1.2
+- name: MAIN_APPLICATION/PINGPONG_IMAGE
+  newName: volepp/dwk-pingpong
+  newTag: v0.3.2
 - name: PROJECT/FRONTEND_IMAGE
   newName: volepp/dwk-project-frontend
   newTag: v1.4.2
