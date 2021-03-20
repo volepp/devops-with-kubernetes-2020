@@ -17,3 +17,6 @@ Since the scope for this decision is only the two parts left in the course, I th
 Also it might be the case that it's wiser to learn how to host the database by yourself since you're not guaranteed to always have Google Cloud SQL at your disposal (for example if you have to use a different provider such as Amazon).
 Although I suspect other providers offer similar kinds of services that are more or less the same usage wise.
 All in all I will try to go with a self-hosted Postgres database for now since it feels like a bit less hassle at the moment.
+
+## Picture of the logs (exercise 3.10)
+!(/images/logs.png)
