@@ -15,7 +15,7 @@ spec:
             volumes:
               - name: shared-volume
                 persistentVolumeClaim:
-                    claimName: dwk-project-pvc
+                    claimName: dwk-project-images-pvc
             containers:
                 - name: dwk-project
                   image: PROJECT/IMAGES_IMAGE

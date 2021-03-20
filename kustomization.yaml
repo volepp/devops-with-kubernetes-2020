@@ -7,6 +7,7 @@ resources:
 - project-frontend/manifests/ingress.yaml
 - project-images/manifests/deployment.yaml
 - project-images/manifests/service.yaml
+- project-images/manifests/persistentvolumeclaim.yaml
 - project-todos/manifests/postgrespvc.yaml
 - project-todos/manifests/postgresstatefulset.yaml
 - project-todos/manifests/postgressvc.yaml
