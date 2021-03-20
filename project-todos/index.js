@@ -21,11 +21,7 @@ Todo.init({
 	text: DataTypes.STRING(140)
 }, { sequelize, modelName: "todo" });
 
-app.get("/", (req, res) => {
-	res.send("healthy")
-})
-
-app.get("/todos", async (req, res) => {
+app.get("/", async (req, res) => {
 	var todos = await Todo.findAll()
 	todosJson = JSON.stringify(todos)
 
@@ -36,7 +32,7 @@ app.get("/todos", async (req, res) => {
 	await sequelize.sync()
 })()
 
-app.post("/todos", async (req, res) => {
+app.post("/", async (req, res) => {
 	todoName = req.body["todo-name"]
 
 	if (todoName.length <= 140) {
