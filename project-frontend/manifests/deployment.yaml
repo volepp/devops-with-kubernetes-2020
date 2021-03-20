@@ -18,6 +18,9 @@ spec:
                   imagePullPolicy: Always
                   ports:
                     - containerPort: 80
+                  volumeMounts:
+                    - name: static-vol
+                      mountPath: /app/static
                   livenessProbe:
                     httpGet:
                         path: /
