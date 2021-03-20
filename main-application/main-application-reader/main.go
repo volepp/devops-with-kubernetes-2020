@@ -9,12 +9,8 @@ import (
 	"strconv"
 )
 
-func getHome(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(200)
-}
-
 func getStatus(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/status" {
+	if r.URL.Path != "/" {
 		http.Error(w, "404 not found", http.StatusNotFound)
 		return
 	}
@@ -44,7 +40,7 @@ func getStatus(w http.ResponseWriter, r *http.Request) {
 }
 
 func fetchNrPongs() int {
-	path := "http://dwk-pingpong-svc:80/pingpong/pongs"
+	path := fmt.Sprintf("http://dwk-pingpong-svc.%s:80/pingpong/pongs", os.Getenv("NAMESPACE"))
 
 	res, err := http.Get(path)
 	if err != nil {
@@ -71,8 +67,7 @@ func fetchNrPongs() int {
 func main() {
 	port := 3000
 
-	http.HandleFunc("/", getHome)
-	http.HandleFunc("/status", getStatus)
+	http.HandleFunc("/", getStatus)
 
 	log.Printf("Listening to port %v\n", port)
 	err := http.ListenAndServe(fmt.Sprintf(":%v", port), nil)

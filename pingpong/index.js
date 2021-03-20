@@ -7,8 +7,9 @@ const { isNullOrUndefined } = require("util")
 var postgresDB = process.env.POSTGRES_DB
 var postgresUser = process.env.POSTGRES_USER
 var postgresPass = process.env.POSTGRES_PASSWORD
+var namespace = process.env.NAMESPACE
 
-const sequelize = new Sequelize(`postgres://${postgresUser}:${postgresPass}@dwk-postgres-svc.main-application:5432/${postgresDB}`)
+const sequelize = new Sequelize(`postgres://${postgresUser}:${postgresPass}@dwk-postgres-svc.${namespace}:5432/${postgresDB}`)
 
 class Pong extends Model {}
 Pong.init({
@@ -25,7 +26,7 @@ Pong.init({
 	}
 })()
 
-app.get("/pingpong", async (req, res) => {
+app.get("/", async (req, res) => {
 	var pongs = await Pong.findAll()
 	var amount = pongs[0].amount+1
 	await Pong.update({ amount: amount }, {
@@ -36,7 +37,7 @@ app.get("/pingpong", async (req, res) => {
 	res.send(`pong ${amount}`)
 })
 
-app.get("/pingpong/pongs", async (req, res) => {
+app.get("/pongs", async (req, res) => {
 	var pongs = await Pong.findAll()
 	var amount = pongs[0].amount
 

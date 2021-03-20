@@ -1,6 +1,13 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+- main-application/manifests/deployment.yaml
+- main-application/manifests/configmap.yaml
+- main-application/manifests/persistentvolumeclaim.yaml
+- main-application/manifests/service.yaml
+- pingpong/manifests/deployment.yaml
+- pingpong/manifests/service.yaml
+- pingpong/manifests/deployment.yaml
 - project-frontend/manifests/deployment.yaml
 - project-frontend/manifests/service.yaml
 - project-frontend/manifests/ingress.yaml

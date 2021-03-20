@@ -22,3 +22,11 @@ spec:
           backend:
             serviceName: dwk-project-todos-svc
             servicePort: 2345
+        - path: /status
+          backend:
+            serviceName: dwk-main-application-svc
+            servicePort: 80
+        - path: /pingpong
+          backend:
+            serviceName: dwk-pingpong-svc
+            servicePort: 80
