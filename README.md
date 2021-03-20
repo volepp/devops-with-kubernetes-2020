@@ -19,4 +19,4 @@ Although I suspect other providers offer similar kinds of services that are more
 All in all I will try to go with a self-hosted Postgres database for now since it feels like a bit less hassle at the moment.
 
 ## Picture of the logs (exercise 3.10)
-!(/images/logs.png)
+![logs](/images/logs.png)
