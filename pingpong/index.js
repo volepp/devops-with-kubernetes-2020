@@ -9,7 +9,7 @@ var postgresUser = process.env.POSTGRES_USER
 var postgresPass = process.env.POSTGRES_PASSWORD
 var namespace = process.env.NAMESPACE
 
-const sequelize = new Sequelize(`postgres://${postgresUser}:${postgresPass}@dwk-postgres-svc.${namespace}:5432/${postgresDB}`)
+const sequelize = new Sequelize(`postgres://${postgresUser}:${postgresPass}@dwk-postgres-svc.main-application:5432/${postgresDB}`)
 
 class Pong extends Model {}
 Pong.init({

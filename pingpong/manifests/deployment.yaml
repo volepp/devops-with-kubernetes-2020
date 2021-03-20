@@ -33,3 +33,7 @@ spec:
                         secretKeyRef:
                             name: dwk-postgres-credentials
                             key: POSTGRES_PASSWORD
+                  resources:
+                    limits:
+                      cpu: "100m"
+                      memory: "50Mi"

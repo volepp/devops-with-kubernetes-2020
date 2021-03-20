@@ -24,6 +24,10 @@ spec:
           volumeMounts:
             - name: shared-volume
               mountPath: /usr/src/app/files
+          resources:
+            limits:
+              cpu: "100m"
+              memory: "35Mi"
         - name: dwk-main-application-reader
           image: volepp/dwk-main-application-reader:v0.3.2
           imagePullPolicy: Always
@@ -37,3 +41,7 @@ spec:
                 configMapKeyRef:
                   name: main-application-configmap
                   key: message
+          resources:
+            limits:
+              cpu: "100m"
+              memory: "35Mi"
