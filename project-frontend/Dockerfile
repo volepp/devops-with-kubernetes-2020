@@ -11,7 +11,7 @@ RUN npm ci
 COPY . /app
 
 RUN npm run build
-
+RUN serve -s build
 
 FROM nginx:1.19.8-alpine
 
