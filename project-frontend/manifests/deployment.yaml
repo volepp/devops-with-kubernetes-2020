@@ -24,4 +24,8 @@ spec:
                         port: 80
                     initialDelaySeconds: 5
                     periodSeconds: 5
+                  resources:
+                    limits:
+                        cpu: "100m"
+                        memory: "10Mi"
             restartPolicy: Always
