@@ -12,19 +12,12 @@ spec:
             labels:
                 app: dwk-project-frontend
         spec:
-            volumes:
-              - name: frontend-volume
-                persistentVolumeClaim:
-                    claimName: dwk-project-frontend-pvc
             containers:
                 - name: dwk-project
                   image: PROJECT/FRONTEND_IMAGE
                   imagePullPolicy: Always
                   ports:
                     - containerPort: 80
-                  volumeMounts:
-                    - name: frontend-volume
-                      mountPath: /app/public
                   livenessProbe:
                     httpGet:
                         path: /healthz
