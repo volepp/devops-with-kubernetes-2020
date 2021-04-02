@@ -3,11 +3,15 @@ kind: Ingress
 metadata:
   namespace: main-application
   name: dwk-main-application-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/add-base-url: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
     - http:
         paths:
-        - path: /status
+        - path: /
           backend:
             serviceName: dwk-main-application-svc
             servicePort: 80

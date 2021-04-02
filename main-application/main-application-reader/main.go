@@ -9,7 +9,11 @@ import (
 	"strconv"
 )
 
-func getHome(w http.ResponseWriter, r *http.Request) {
+func getHealth(w http.ResponseWriter, r *http.Request) {
+	if fetchNrPongs() == -1 {
+		w.WriteHeader(500)
+		return
+	}
 	w.WriteHeader(200)
 }
 
@@ -44,7 +48,7 @@ func getStatus(w http.ResponseWriter, r *http.Request) {
 }
 
 func fetchNrPongs() int {
-	path := "http://dwk-pingpong-svc:80/pingpong/pongs"
+	path := "http://dwk-pingpong-svc.main-application:80/pongs"
 
 	res, err := http.Get(path)
 	if err != nil {
@@ -71,7 +75,7 @@ func fetchNrPongs() int {
 func main() {
 	port := 3000
 
-	http.HandleFunc("/", getHome)
+	http.HandleFunc("/healthz", getHealth)
 	http.HandleFunc("/status", getStatus)
 
 	log.Printf("Listening to port %v\n", port)
