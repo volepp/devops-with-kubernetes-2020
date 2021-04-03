@@ -28,6 +28,10 @@ app.get("/", (req, res) => {
 	res.sendFile(imagePath)
 })
 
+app.get("/healthz", (req, res) => {
+	res.sendStatus(200)
+})
+
 app.listen(port, () => {
 	console.log(`Server started in port ${port}`)
 })

@@ -25,15 +25,15 @@ spec:
                       mountPath: /app/public
                   livenessProbe:
                     httpGet:
-                        path: /
+                        path: /healthz
                         port: 3000
                     initialDelaySeconds: 5
                     periodSeconds: 5
                   readinessProbe:
                     httpGet:
-                        path: /
+                        path: /healthz
                         port: 3000
-                    initialDelaySeconds: 5
+                    initialDelaySeconds: 10
                     periodSeconds: 5
                   resources:
                     limits:

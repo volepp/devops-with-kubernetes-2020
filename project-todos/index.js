@@ -42,6 +42,15 @@ app.post("/", async (req, res) => {
 	res.redirect("back")
 })
 
+app.get("/healthz", async (req, res) => {
+	try {
+		await sequelize.authenticate()
+		res.sendStatus(200)
+	} catch {
+		res.sendStatus(500)
+	}
+})
+
 app.listen(port, () => {
 	console.log(`Server started in port ${port}`)
 })
