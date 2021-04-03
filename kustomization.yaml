@@ -4,6 +4,7 @@ resources:
 - project-frontend/manifests/deployment.yaml
 - project-frontend/manifests/service.yaml
 - project-frontend/manifests/ingress.yaml
+- project-frontend/manifests/analysistemplate.yaml
 - project-images/manifests/deployment.yaml
 - project-images/manifests/service.yaml
 - project-images/manifests/persistentvolumeclaim.yaml
