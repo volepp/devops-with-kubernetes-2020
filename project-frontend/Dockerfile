@@ -10,6 +10,9 @@ RUN npm ci
 
 COPY . /app
 
+ARG REACT_APP_NAMESPACE
+ENV REACT_APP_NAMESPACE $REACT_APP_NAMESPACE
+
 RUN npm run build
 
 FROM nginx:1.19.8-alpine

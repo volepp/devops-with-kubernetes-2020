@@ -28,6 +28,33 @@ class App extends React.Component {
           })
         }
       )
+    this.setState({
+      isLoaded: true,
+      todos: [{id: 3, text: "test", done: true}, {text: "test2", done: false}]
+    })
+  }
+
+  handleTodoStatusChanged(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const id = target.name;
+
+    const namespace = process.env.REACT_APP_NAMESPACE
+
+    fetch(`/todos/${id}`, {
+      method: "PUT",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        id: id,
+        done: value
+      })
+    }).then(res => {
+      if(res.status == 200) {
+        target.checked = value
+      }
+    })
   }
 
   render() {
@@ -52,7 +79,10 @@ class App extends React.Component {
         <ul>
           { todos.map(todo => (
             <li>
-              {todo.text}
+              <form>
+                <label>{todo.text} </label>
+                <input name={todo.id} type="checkbox" checked={todo.done} onChange={this.handleTodoStatusChanged}/>
+              </form>
             </li>
           ))}
         </ul>
