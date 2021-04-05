@@ -4,6 +4,7 @@ const port = 3000
 const bodyParser = require("body-parser")
 const { Sequelize, Model, DataTypes } = require("sequelize")
 const morgan = require("morgan")
+const nats = require("nats")
 
 app.use(morgan("combined"))
 
@@ -14,6 +15,9 @@ var postgresDB = process.env.POSTGRES_DB
 var postgresUser = process.env.POSTGRES_USER
 var postgresPass = process.env.POSTGRES_PASSWORD
 var namespace = process.env.NAMESPACE
+var natsName = process.env.NATS_NAME
+
+const nc = nats.connect({url: `nats://${natsName}.${namespace}:4222`}) || null
 
 const sequelize = new Sequelize(`postgres://${postgresUser}:${postgresPass}@dwk-postgres-svc.${namespace}:5432/${postgresDB}`)
 
@@ -25,7 +29,7 @@ Todo.init({
 
 app.get("/", async (req, res) => {
 	var todos = await Todo.findAll()
-	todosJson = JSON.stringify(todos)
+	var todosJson = JSON.stringify(todos)
 
 	res.json(todosJson)
 });
@@ -38,31 +42,37 @@ app.post("/", async (req, res) => {
 	todoName = req.body["todo-name"]
 
 	if (todoName.length <= 140) {
-		await Todo.create({ text: todoName, done: false })
+		var todo = await Todo.create({ text: todoName, done: false })
+		var todoJson = JSON.stringify(todo)
+
+		nc.publish("todos", todoJson)
 	}
 
 	res.redirect("back")
 })
 
 app.get("/healthz", async (req, res) => {
-	try {
-		await sequelize.authenticate()
-		res.sendStatus(200)
-	} catch {
+	if (nc == null) {
 		res.sendStatus(500)
+	} else {
+		try {
+			await sequelize.authenticate()
+			res.sendStatus(200)
+		} catch {
+			res.sendStatus(500)
+		}
 	}
 })
 
 app.put("/:id", async (req, res) => {
 	var id = req.params.id
 	var todo = await Todo.findByPk(id)
-	console.log(id, todo)
 	if(todo) {
-		console.log("testi")
-		console.log(req.body)
 		todo.update({
 			done: req.body["done"]
 		  }).then((response) => {
+		  	var todoJson = JSON.stringify(todo)
+		  	nc.publish("todos", todoJson)
 		  	res.sendStatus(200)
 		  }).catch((reason) => {
 		  	console.log("Failed to update todo:", reason)

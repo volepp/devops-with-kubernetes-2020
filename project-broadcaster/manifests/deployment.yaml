@@ -1,12 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-    name: dwk-project-todos-dep
+    name: dwk-project-broadcaster-dep
 spec:
-    replicas: 1
+    replicas: 6
     selector:
         matchLabels:
-            app: dwk-project-todos
+            app: dwk-project-broadcaster
     strategy:
         canary:
             steps:
@@ -17,35 +17,25 @@ spec:
     template:
         metadata:
             labels:
-                app: dwk-project-todos
+                app: dwk-project-broadcaster
         spec:
             containers:
-                - name: dwk-project-todos
-                  image: PROJECT/TODOS_IMAGE
+                - name: dwk-project-broadcaster
+                  image: PROJECT/BROADCASTER_IMAGE
                   imagePullPolicy: Always
                   env:
-                    - name: POSTGRES_DB
-                      valueFrom:
-                        secretKeyRef:
-                            name: dwk-postgres-credentials
-                            key: POSTGRES_DB
-                    - name: POSTGRES_USER
-                      valueFrom:
-                        secretKeyRef:
-                            name: dwk-postgres-credentials
-                            key: POSTGRES_USER
-                    - name: POSTGRES_PASSWORD
-                      valueFrom:
-                        secretKeyRef:
-                            name: dwk-postgres-credentials
-                            key: POSTGRES_PASSWORD
+                    - name: NATS_NAME
+                      value: dwk-nats
                     - name: NAMESPACE
                       valueFrom:
                         configMapKeyRef:
                           name: namespace-config
                           key: namespace
-                    - name: NATS_NAME
-                      value: dwk-nats
+                    - name: DISCORD_TOKEN
+                      valueFrom:
+                        secretKeyRef:
+                            name: dwk-discord-token
+                            key: DISCORD_TOKEN
                   livenessProbe:
                     httpGet:
                         path: /healthz

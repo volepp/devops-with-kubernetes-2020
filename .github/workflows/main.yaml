@@ -9,6 +9,7 @@ env:
   FRONTEND_IMAGE: dwk-project-frontend
   IMAGES_IMAGE: dwk-project-images
   TODOS_IMAGE: dwk-project-todos
+  BROADCASTER_IMAGE: dwk-project-broadcaster
 
 jobs:
   setup-build-publish-deploy:
@@ -24,6 +25,7 @@ jobs:
         echo "FRONTEND_IMAGE_WITH_TAG=gcr.io/${{ secrets.GKE_PROJECT }}/$FRONTEND_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" >> $GITHUB_ENV
         echo "IMAGES_IMAGE_WITH_TAG=gcr.io/${{ secrets.GKE_PROJECT }}/$IMAGES_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" >> $GITHUB_ENV
         echo "TODOS_IMAGE_WITH_TAG=gcr.io/${{ secrets.GKE_PROJECT }}/$TODOS_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" >> $GITHUB_ENV
+        echo "BROADCASTER_IMAGE_WITH_TAG=gcr.io/${{ secrets.GKE_PROJECT }}/$BROADCASTER_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" >> $GITHUB_ENV
 
     - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
       with:
@@ -39,12 +41,14 @@ jobs:
         docker build --tag "$FRONTEND_IMAGE_WITH_TAG" --build-arg REACT_APP_NAMESPACE=${GITHUB_REF#refs/heads/} ./project-frontend
         docker build --tag "$IMAGES_IMAGE_WITH_TAG" ./project-images
         docker build --tag "$TODOS_IMAGE_WITH_TAG" ./project-todos
+        docker build --tag "$BROADCASTER_IMAGE_WITH_TAG" ./project-broadcaster
         
     - name: Publish
       run: |
         docker push "$FRONTEND_IMAGE_WITH_TAG"
         docker push "$IMAGES_IMAGE_WITH_TAG"
         docker push "$TODOS_IMAGE_WITH_TAG"
+        docker push "$BROADCASTER_IMAGE_WITH_TAG"
 
     - name: Set up Kustomize
       run: |-
@@ -59,6 +63,11 @@ jobs:
         ./kustomize edit set image PROJECT/FRONTEND_IMAGE=$FRONTEND_IMAGE_WITH_TAG
         ./kustomize edit set image PROJECT/IMAGES_IMAGE=$IMAGES_IMAGE_WITH_TAG
         ./kustomize edit set image PROJECT/TODOS_IMAGE=$TODOS_IMAGE_WITH_TAG
+        ./kustomize edit set image PROJECT/BROADCASTER_IMAGE=$BROADCASTER_IMAGE_WITH_TAG
         kubectl create configmap namespace-config --from-literal=namespace=${GITHUB_REF#refs/heads/} --dry-run -o yaml | kubectl apply -f -
         kubectl create secret generic dwk-postgres-credentials --from-literal="POSTGRES_DB=${{ secrets.POSTGRES_DB }}" --from-literal="POSTGRES_USER=${{ secrets.POSTGRES_USER }}" --from-literal="POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" --dry-run -o yaml | kubectl apply -f -
+        kubectl create secret generic dwk-discord-token --from-literal="DISCORD_TOKEN=${{ secrets.DISCORD_TOKEN }}" --dry-run -o yaml | kubectl apply -f -
+        helm repo add nats https://nats-io.github.io/k8s/helm/charts/
+        helm repo update
+        helm install dwk-nats nats/nats -n ${GITHUB_REF#refs/heads/}
         kubectl apply -k .

@@ -14,6 +14,7 @@ resources:
 - project-todos/manifests/deployment.yaml
 - project-todos/manifests/service.yaml
 - project-todos/daily_todo/manifests/cronjob.yaml
+- project-broadcaster/manifests/deployment.yaml
 
 images:
 - name: PROJECT/FRONTEND_IMAGE
@@ -24,4 +25,7 @@ images:
   newTag: v1.7
 - name: PROJECT/TODOS_IMAGE
   newName: volepp/dwk-project-todos
-  newTag: v1.9
+  newTag: v2.0
+- name: PROJECT/BROADCASTER_IMAGE
+  newName: volepp/dwk-project-broadcaster
+  newTag: v2.0

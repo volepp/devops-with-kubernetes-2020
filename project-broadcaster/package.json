@@ -1,5 +1,5 @@
 {
-  "name": "project-todos",
+  "name": "project-broadcaster",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,10 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "discord.js": "12.5.3",
     "express": "4.17.1",
-    "morgan": "1.10.0",
-    "nats": "1.4.12",
-    "pg": "8.5.1",
-    "sequelize": "6.5.0"
+    "nats": "1.4.12"
   }
 }
