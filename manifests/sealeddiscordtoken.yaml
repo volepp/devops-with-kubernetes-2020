@@ -1,0 +1,16 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: dwk-discord-token
+  namespace: default
+spec:
+  encryptedData:
+    DISCORD_TOKEN: AgA4AgC38tsw8mdTejaTV8uCG1rasC5ZbczhUE1P1ygqe9SwCdkIy5WfQFK+zdqPL812zCOQw03REhDC9x4Se8zc+N6NWODop5dcgTJ7Iq3ZhbkggV9VlnAJiOc6/hjriBaKJ2rF2LKC9D6VULJAdKUKmWtjI4M+Myp35d3NJeHbe2nQ/2ktpoPugac1Sk1Fwg5/unSqAz5pglO/bpfSLPbjfbA2OFYpziDiSzeJFd1Gp6jnoh2jTgGfAof9O5T3lf10HalZXixX1Vm5ogyOvCWi3C8x3UJPF/dhnUpw5Gr7xpLscH+0pvHg9KB9EB7YETn+B4VVrzVIzr5atOqTqu4C8bm3FpHohMfrEj/PX5Up/nt479sKPXKb3QgfO2vBTKGnuujFF272I+uEEPZ4BQW8Z5j3106r51hIOofdHblCVI06S0lkbKBBfXjkaIPwu0QjrHeLIpGRaVtiLwLyb8H+9cuRrjEaWtUae2FFX0UnntEOod5Be8Ei6Lf70pbSIDIBNbDusbBEYrvseaRoC6lQA9fzI6DLcKOeyZS1V//FpTySYvEjFkeGApOojU5fAFw2v1G/9gXJQVFUck5WLyX9GJP1zDQslaIQ2ElhVSi5UY+WQYLvsJ8DLMMc6QRk5vEalPwZfueLqWnd9GmxiB7x9R/p6us7T5oOJE6ri4lGE/XlMX0lZaRXAwiDYLvK2lyq/T9lw4hE35jtDBtM92RqRVaLwIBArozAFYsYXquvJNqNZ2q5pv2bxddpcYKEHe4mAXhz5HOVxfUC/Q==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: dwk-discord-token
+      namespace: default
+    type: Opaque
+
