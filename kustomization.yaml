@@ -22,13 +22,13 @@ resources:
 images:
 - name: PROJECT/BROADCASTER_IMAGE
   newName: volepp/dwk-project-broadcaster
-  newTag: fcbf57ba094dbeab16e1b216efeff3ac9eab696e
+  newTag: 54b30bcb84e71e90ed2677810ec576e1ac55da4b
 - name: PROJECT/FRONTEND_IMAGE
   newName: volepp/dwk-project-frontend
-  newTag: fcbf57ba094dbeab16e1b216efeff3ac9eab696e
+  newTag: 54b30bcb84e71e90ed2677810ec576e1ac55da4b
 - name: PROJECT/IMAGES_IMAGE
   newName: volepp/dwk-project-images
-  newTag: fcbf57ba094dbeab16e1b216efeff3ac9eab696e
+  newTag: 54b30bcb84e71e90ed2677810ec576e1ac55da4b
 - name: PROJECT/TODOS_IMAGE
   newName: volepp/dwk-project-todos
-  newTag: fcbf57ba094dbeab16e1b216efeff3ac9eab696e
+  newTag: 54b30bcb84e71e90ed2677810ec576e1ac55da4b
