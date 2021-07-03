@@ -361,8 +361,8 @@ kind: List
 metadata: {}
 ---
 
-deployment "dummy-test-dep-e9da12" injected
-deployment "dwk-nats-box" injected
+#deployment "dummy-test-dep-e9da12" injected
+#eployment "dwk-nats-box" injected
 
-THIS IS FOR EXERCISE 5.02. 
-NOTE: some parts in the project were not deployments but Rollouts and it seems that Linkerd doesn't have support for Rollouts.
+# THIS IS FOR EXERCISE 5.02. 
+# NOTE: some parts in the project were not deployments but Rollouts and it seems that Linkerd doesn't have support for Rollouts.
