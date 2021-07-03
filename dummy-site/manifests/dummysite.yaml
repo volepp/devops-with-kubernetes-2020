@@ -1,0 +1,37 @@
+# apiVersion: apiextensions.k8s.io/v1
+# kind: CustomResourceDefinition
+# metadata:
+#   name: dummy-site.stable.dwk
+# spec:
+#   group: stable.dwk
+#   scope: Namespaced
+#   names:
+#     kind: DummySite
+#     plural: dummysites
+#     singular: dummysite
+#     shortNames:
+#     - ds
+#   versions:
+#     - name: v1
+#       served: true
+#       storage: true
+#       schema:
+#         openAPIV3Schema:
+#           type: object
+#           properties:
+#             spec:
+#               type: object
+#               properties:
+#                 website_url:
+#                   type: string
+#       additionalPrinterColumns:
+#         - name: WebsiteUrl
+#           type: string
+#           description: The URL of the website
+#           jsonPath: .spec.website_url
+apiVersion: stable.dwk.stable.dwk/v1
+kind: DummySite
+metadata:
+  name: dummy-test
+spec:
+  website_url: https://example.com

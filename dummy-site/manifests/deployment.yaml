@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dummy-site-controller-dep
+spec:
+  selector:
+    matchLabels:
+      app: dummy-site-controller
+  template:
+    metadata:
+      labels:
+        app: dummy-site-controller
+    spec:
+      containers:
+      - name: dummy-site-controller
+        image: volepp/dummy-site-controller
