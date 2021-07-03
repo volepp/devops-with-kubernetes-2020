@@ -1,6 +1,6 @@
 const express = require("express")
 const app = express()
-const port = 3000
+const port = parseInt(process.env.SERVER_PORT) || 8080
 const { Sequelize, Model, DataTypes } = require("sequelize")
 const { isNullOrUndefined } = require("util")
 

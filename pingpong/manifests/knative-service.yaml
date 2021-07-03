@@ -1,0 +1,14 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: dwk-pingpong
+spec:
+  template:
+    metadata:
+      name: dwk-pingpong-dwk-pingpong-v1
+    spec:
+      containers:
+        - image: volepp/dwk-pingpong
+          env:
+            - name: SERVER_PORT
+              value: "8080"
