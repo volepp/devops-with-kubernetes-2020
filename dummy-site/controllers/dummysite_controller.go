@@ -89,7 +89,6 @@ func (r *DummySiteReconciler) Reconcile(ctx context.Context, req ctrl.Request) (
 func getDep(dummySite *stabledwkv1.DummySite, r *DummySiteReconciler) (*appsv1.Deployment, error) {
 	replicas := new(int32)
 	*replicas = 1
-	fmt.Println(dummySite.Spec.WebsiteUrl)
 	dep := &appsv1.Deployment{
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      dummySite.Name + "-dep-" + randomBase16String(6),
@@ -115,7 +114,7 @@ func getDep(dummySite *stabledwkv1.DummySite, r *DummySiteReconciler) (*appsv1.D
 							Image: "volepp/dummy-site",
 							Ports: []apiv1.ContainerPort{
 								{
-									ContainerPort: 8080,
+									ContainerPort: 3000,
 								},
 							},
 							Env: []apiv1.EnvVar{
